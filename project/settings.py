@@ -1,4 +1,10 @@
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
+db_password = os.environ['DB_PASSWORD']
+db_user = os.environ['DB_USER']
+web_key = os.environ['WEB_SECRET_KEY']
 
 DATABASES = {
     'default': {
@@ -6,14 +12,14 @@ DATABASES = {
         'HOST': 'checkpoint.devman.org',
         'PORT': '5434',
         'NAME': 'checkpoint',
-        'USER': 'guard',
-        'PASSWORD': 'osim5',
+        'USER': db_user,
+        'PASSWORD': db_password,
     }
 }
 
 INSTALLED_APPS = ['datacenter']
 
-SECRET_KEY = 'REPLACE_ME'
+SECRET_KEY = web_key
 
 DEBUG = True
 
