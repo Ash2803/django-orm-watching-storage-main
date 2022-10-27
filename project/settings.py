@@ -5,27 +5,24 @@ from environs import Env
 
 env = Env()
 env.read_env()
-db_password = env('DB_PASSWORD')
-db_user = env('DB_USER')
-web_key = env('WEB_SECRET_KEY')
-debug = env('DEBUG')
+
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'HOST': 'checkpoint.devman.org',
-        'PORT': '5434',
-        'NAME': 'checkpoint',
-        'USER': db_user,
-        'PASSWORD': db_password,
+        'ENGINE': env('DB_ENGINE'),
+        'HOST': env('DB_HOST'),
+        'PORT': env('DB_PORT'),
+        'NAME': env('DB_NAME'),
+        'USER': env('DB_USER'),
+        'PASSWORD': env('DB_PASSWORD')
     }
 }
 
 INSTALLED_APPS = ['datacenter']
 
-SECRET_KEY = web_key
+SECRET_KEY = env('WEB_SECRET_KEY')
 
-DEBUG = debug
+DEBUG = env('DEBUG')
 
 ROOT_URLCONF = 'project.urls'
 
